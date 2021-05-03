@@ -2,7 +2,8 @@ import os
 import random
 import discord
 from discord.ext import commands
-from substrateinterface import SubstrateInterface, Keypair, SubstrateRequestException
+from substrateinterface import SubstrateInterface, Keypair
+from substrateinterface.exceptions import SubstrateRequestException
 from substrateinterface.utils.ss58 import ss58_encode
 
 # Your Discord bot token
