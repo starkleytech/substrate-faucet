@@ -1,4 +1,4 @@
-# Faucet bot for substrate python based
+# Faucet bot for substrate python3 based
 
 This bot is a really simple bot without security or threshold. It's used to send coins with discord.
 
