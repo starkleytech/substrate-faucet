@@ -15,7 +15,7 @@ spec:
           name: ""
           resources:
             requests:
-              cpu: 400m
+              cpu: 50m
               memory: 512Mi
           workingDir: /workspace/source
         steps:
@@ -24,8 +24,8 @@ spec:
           resources: {}
         - name: jx-variables
           resources: {}
-        - name: build-python-unittest
-          resources: {}
+        # - name: build-python-unittest
+        #   resources: {}
         - name: check-registry
           resources: {}
         - name: build-container-build
