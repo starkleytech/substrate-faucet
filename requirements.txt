@@ -1,0 +1,2 @@
+substrate-interface==1.2.2
+discord.py==1.7.3
