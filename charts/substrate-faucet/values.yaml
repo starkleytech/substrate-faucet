@@ -24,15 +24,26 @@ jx:
 
 # define environment variables here as a map of key: value
 env:
+  - DISCORD_BOT_TOKEN=""
+  - NODE_RPC=wss://wss.test.peaq.network 
+  - FAUCET_MNEMONIC=""
+  - TOKENS_TO_SEND=1000000000000000000
+  - TOKEN_SYMBOL="PEAQ"
+  - ISSUE_INTERVAL=5
+  - REDIS_IP=127.0.0.1
+  - REDIS_PORT=6379
+
+envFrom:
+  - test-net-faucet-bot-config
 
 # enable this flag to use knative serve to deploy the app
 knativeDeploy: false
 
 # HorizontalPodAutoscaler
 hpa:
-  enabled: false
-  minReplicas: 2
-  maxReplicas: 6
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 4
   cpuTargetAverageUtilization: 80
   memoryTargetAverageUtilization: 80
   # Add labels to the HPA
@@ -61,20 +72,12 @@ canary:
   # Add labels to the canary gateway
   gatewayLabels: {}
 
-service:
-  name: substrate-faucet
-  type: ClusterIP
-  externalPort: 80
-  internalPort: 8080
-  annotations: {}
-  # Add labels to the service
-  labels: {}
 resources:
   limits:
-    cpu: 400m
+    cpu: 100m
     memory: 256Mi
   requests:
-    cpu: 200m
+    cpu: 50m
     memory: 128Mi
 probePath: /
 livenessProbe:
