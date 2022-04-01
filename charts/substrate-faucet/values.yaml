@@ -86,7 +86,6 @@ canary:
   # Add labels to the canary gateway
   gatewayLabels: {}
 
-resources: {}
 probePath: /
 livenessProbe:
   initialDelaySeconds: 60
