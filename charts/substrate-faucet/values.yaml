@@ -32,6 +32,7 @@ env:
   - ISSUE_INTERVAL=5
   - REDIS_IP=127.0.0.1
   - REDIS_PORT=6379
+  - PROMETHEUS_PORT=8080
 
 envFrom:
   - test-net-faucet-bot-config

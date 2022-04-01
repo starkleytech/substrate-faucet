@@ -31,6 +31,7 @@ Default values are as follows
 |ISSUE_INTERVAL|5|
 |REDIS_IP|127.0.0.1|
 |REDIS_PORT|6379|
+|PROMETHEUS_PORT|8080|
 
 
 Additionally a secret must be created under the name of "test-net-faucet-bot-secret" containing the bot token and key mnemonic.
