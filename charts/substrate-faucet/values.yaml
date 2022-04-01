@@ -24,18 +24,19 @@ jx:
 
 # define environment variables here as a map of key: value
 env:
-  - DISCORD_BOT_TOKEN=""
-  - NODE_RPC=wss://wss.test.peaq.network 
-  - FAUCET_MNEMONIC=""
-  - TOKENS_TO_SEND=1000000000000000000
-  - TOKEN_SYMBOL="PEAQ"
-  - ISSUE_INTERVAL=5
-  - REDIS_IP=127.0.0.1
-  - REDIS_PORT=6379
-  - PROMETHEUS_PORT=8080
+  DISCORD_BOT_TOKEN=""
+  NODE_RPC=wss://wss.test.peaq.network 
+  FAUCET_MNEMONIC=""
+  TOKENS_TO_SEND=1000000000000000000
+  TOKEN_SYMBOL="PEAQ"
+  ISSUE_INTERVAL=5
+  REDIS_IP=127.0.0.1
+  REDIS_PORT=6379
+  PROMETHEUS_PORT=8080
 
 envFrom:
-  - test-net-faucet-bot-config
+  - configMapRef:
+      name: test-net-faucet-bot-config
 
 botSecrets:
   name: test-net-faucet-bot-secret
