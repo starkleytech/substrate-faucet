@@ -36,6 +36,10 @@ env:
 envFrom:
   - test-net-faucet-bot-config
 
+botSecrets:
+  namespace: default
+  name: test-net-faucet-bot-secret
+
 # enable this flag to use knative serve to deploy the app
 knativeDeploy: false
 
