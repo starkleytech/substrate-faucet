@@ -106,6 +106,8 @@ spec:
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        resources:
+{{ toYaml .Values.resources | indent 12 }}          
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       imagePullSecrets:
 {{- range $pval := .Values.jx.imagePullSecrets }}
