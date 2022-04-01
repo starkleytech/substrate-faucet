@@ -68,14 +68,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: {{ .Values.botSecrets.name }}
-              namespace: {{ .Values.botSecrets.namespace }}
               key: DISCORD_BOT_TOKEN
               optional: false
         - name: FAUCET_MNEMONIC
           valueFrom:
             secretKeyRef:
               name: {{ .Values.botSecrets.name }}
-              namespace: {{ .Values.botSecrets.namespace }}
               key: FAUCET_MNEMONIC
               optional: false
 {{- range $pkey, $pval := .Values.env }}
