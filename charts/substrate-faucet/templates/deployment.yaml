@@ -87,9 +87,7 @@ spec:
         - name: REDIS_PORT
           value: "{{ .Values.botConfig.REDIS_PORT }}"
         - name: PROMETHEUS_PORT
-          value: "{{ .Values.botConfig.PROMETHEUS_PORT }}"        resources:
-          {{ toYaml .Values.resources | indent 12 }}
-          
+          value: "{{ .Values.botConfig.PROMETHEUS_PORT }}"
         ports:
         - name: http
           containerPort: {{ .Values.service.internalPort }}
