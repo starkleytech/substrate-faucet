@@ -36,12 +36,12 @@ TOKENS_TO_SEND = int(get_env_var_or_exit("TOKENS_TO_SEND"))
 #the token symbol
 TOKEN_SYMBOL = get_env_var_or_exit("TOKEN_SYMBOL")
 #how often can a user ask for a token? in seconds
-ISSUE_INTERVAL = get_env_var_or_exit("ISSUE_INTERVAL")
+ISSUE_INTERVAL = int(get_env_var_or_exit("ISSUE_INTERVAL"))
 #redis
 REDIS_IP = get_env_var_or_exit("REDIS_IP")
-REDIS_PORT = get_env_var_or_exit("REDIS_PORT")
+REDIS_PORT = int(get_env_var_or_exit("REDIS_PORT"))
 #prometheus
-PROMETHEUS_PORT = get_env_var_or_exit("PROMETHEUS_PORT")
+PROMETHEUS_PORT = int(get_env_var_or_exit("PROMETHEUS_PORT"))
 
 # associated address 5CfVS8r8sNiioYi4YmtJjPhYgxcxuMXYg1Gkp91LtHCmkqiQ
 bot = commands.Bot(command_prefix='!')
@@ -61,7 +61,7 @@ async def nine_nine(ctx, arg):
     else:
         
         #ensure we comply with send frequency
-        r = redis.Redis(host=REDIS_IP, port=int(REDIS_PORT))
+        r = redis.Redis(host=REDIS_IP, port=REDIS_PORT)
         if r.exists(arg):
             await ctx.send("You can only request once every [{}] second(s) !".format(ISSUE_INTERVAL))
             ISSUANCE_THROTTLED.inc()
@@ -97,7 +97,7 @@ async def nine_nine(ctx, arg):
         ISSUANCE_TOTAL.inc(TOKENS_TO_SEND/1000000000000000000)
 
 def prometheus_server():
-    start_http_server(int(PROMETHEUS_PORT))
+    start_http_server(PROMETHEUS_PORT)
 
 print("Starting prometheus server")
 t_prometheus = Thread(target=prometheus_server)
