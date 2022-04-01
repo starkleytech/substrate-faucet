@@ -91,12 +91,12 @@ spec:
         - name: PROMETHEUS_PORT
           value: {{ .Values.botConfig.PROMETHEUS_PORT }}
         
-{{- range $pkey, $pval := .Values.env }}
+{% comment %} {{- range $pkey, $pval := .Values.env }}
         - name: {{ $pkey }}
           value: {{ quote $pval }}
 {{- end }}
         envFrom:
-{{ toYaml .Values.envFrom | indent 10 }}
+{{ toYaml .Values.envFrom | indent 10 }} {% endcomment %}
         ports:
         - name: http
           containerPort: {{ .Values.service.internalPort }}
