@@ -52,6 +52,9 @@ async def nine_nine(ctx, arg):
     
     INVOCATION_COUNT.inc()
     
+    if arg != None and len(arg) != 48:
+        return
+    
     if (str(ctx.channel.type) == "private"):
         # Forbid DM in discord
         await ctx.send("Hold on Capt'ain, you can't send me private messages !")
