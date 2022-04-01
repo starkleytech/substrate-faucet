@@ -43,6 +43,8 @@ spec:
         image: redis:5.0.4
         ports:
         - containerPort: 6379
+        resources:
+          requests: {}   
         readinessProbe:
           tcpSocket:
             port: 6379
