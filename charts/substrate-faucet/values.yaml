@@ -24,15 +24,24 @@ jx:
 
 # define environment variables here as a map of key: value
 env:
-  - DISCORD_BOT_TOKEN: ""
-  - NODE_RPC: wss://wss.test.peaq.network 
-  - FAUCET_MNEMONIC: ""
-  - TOKENS_TO_SEND: 1000000000000000000
-  - TOKEN_SYMBOL: "PEAQ"
-  - ISSUE_INTERVAL: 5
-  - REDIS_IP: 127.0.0.1
-  - REDIS_PORT: 6379
-  - PROMETHEUS_PORT: 8080
+  - name: "DISCORD_BOT_TOKEN"
+    value: ""
+  - name: NODE_RPC
+    value: "wss://wss.test.peaq.network"
+  - name: "FAUCET_MNEMONIC"
+    value: ""
+  - name: "TOKENS_TO_SEND"
+    value: 1000000000000000000
+  - name: "TOKEN_SYMBOL"
+    value: "PEAQ"
+  - name: "ISSUE_INTERVAL"
+    value: 5
+  - name: "REDIS_IP"
+    value: 127.0.0.1
+  - name: "REDIS_PORT"
+    value: 6379
+  - name: "PROMETHEUS_PORT"
+    value: 8080
 
 envFrom:
   - configMapRef:
