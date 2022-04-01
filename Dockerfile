@@ -5,10 +5,8 @@ WORKDIR /app
 COPY ["requirements.txt", "/app/"]
 RUN pip install -r requirements.txt
 
-COPY ["faucet.py", "/app/"]
+COPY ["app/faucet.py", "/app/"]
 
-ENV PORT 8080
-EXPOSE 8080
-
+WORKDIR /app
 ENTRYPOINT ["python"]
 CMD ["faucet.py"]
