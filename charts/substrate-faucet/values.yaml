@@ -31,12 +31,12 @@ envFrom:
 
 botConfig:
   NODE_RPC: "wss://wss.test.peaq.network"
-  TOKENS_TO_SEND: 1000000000000000000
+  TOKENS_TO_SEND: "1000000000000000000"
   TOKEN_SYMBOL: "PEAQ"
   ISSUE_INTERVAL: 5
   REDIS_IP: "127.0.0.1"
-  REDIS_PORT: 6379
-  PROMETHEUS_PORT: 8080
+  REDIS_PORT: "6379"
+  PROMETHEUS_PORT: "8080"
 
 botSecrets:
   name: test-net-faucet-bot-secret

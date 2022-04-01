@@ -32,7 +32,7 @@ NODE_RPC = get_env_var_or_exit("NODE_RPC")
 #to construct the private/public key pair
 FAUCET_MNEMONIC = get_env_var_or_exit("FAUCET_MNEMONIC")
 #how many tokens to send, on peaq network 1 PEAQ = 1,000,000,000,000,000,000
-TOKENS_TO_SEND = get_env_var_or_exit("TOKENS_TO_SEND")
+TOKENS_TO_SEND = int(get_env_var_or_exit("TOKENS_TO_SEND"))
 #the token symbol
 TOKEN_SYMBOL = get_env_var_or_exit("TOKEN_SYMBOL")
 #how often can a user ask for a token? in seconds
@@ -61,7 +61,7 @@ async def nine_nine(ctx, arg):
     else:
         
         #ensure we comply with send frequency
-        r = redis.Redis(host=REDIS_IP, port=REDIS_PORT)
+        r = redis.Redis(host=REDIS_IP, port=int(REDIS_PORT))
         if r.exists(arg):
             await ctx.send("You can only request once every [{}] second(s) !".format(ISSUE_INTERVAL))
             ISSUANCE_THROTTLED.inc()
@@ -87,14 +87,14 @@ async def nine_nine(ctx, arg):
         reply = substrate.submit_extrinsic(extrinsic, wait_for_inclusion=False)
         
         # inform user
-        msg = " Awesome, you just received \"{}\" {}! The extrinsic hash is [{}]".format(int(TOKENS_TO_SEND)/1000000000000000000, TOKEN_SYMBOL, reply['extrinsic_hash'])
+        msg = " Awesome, you just received \"{}\" {}! The extrinsic hash is [{}]".format(TOKENS_TO_SEND/1000000000000000000, TOKEN_SYMBOL, reply['extrinsic_hash'])
         await ctx.send(str(ctx.author.mention) + msg)
         
         # log to console
         print(str(ctx.author.name) + msg)
         
         # store metrics
-        ISSUANCE_TOTAL.inc(int(TOKENS_TO_SEND)/1000000000000000000)
+        ISSUANCE_TOTAL.inc(TOKENS_TO_SEND/1000000000000000000)
 
 def prometheus_server():
     start_http_server(int(PROMETHEUS_PORT))
