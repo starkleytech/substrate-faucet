@@ -43,10 +43,10 @@ spec:
         image: redis:5.0.4
         ports:
         - containerPort: 6379
-        resources:
+        {% comment %} resources:
           requests:
             cpu: 250m
-            memory: 100Mi
+            memory: 100Mi {% endcomment %}
         readinessProbe:
           tcpSocket:
             port: 6379
@@ -108,8 +108,8 @@ spec:
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
-        resources:
-{{ toYaml .Values.resources | indent 12 }}
+        {% comment %} resources:
+{{ toYaml .Values.resources | indent 12 }} {% endcomment %}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       imagePullSecrets:
 {{- range $pval := .Values.jx.imagePullSecrets }}
