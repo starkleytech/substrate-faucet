@@ -86,13 +86,7 @@ canary:
   # Add labels to the canary gateway
   gatewayLabels: {}
 
-resources:
-  limits:
-    cpu: 500m
-    memory: 512Mi
-  requests:
-    cpu: 250m
-    memory: 256Mi
+resources: {}
 probePath: /
 livenessProbe:
   initialDelaySeconds: 60

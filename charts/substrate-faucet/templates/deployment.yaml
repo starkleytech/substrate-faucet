@@ -43,10 +43,6 @@ spec:
         image: redis:5.0.4
         ports:
         - containerPort: 6379
-        {% comment %} resources:
-          requests:
-            cpu: 250m
-            memory: 100Mi {% endcomment %}
         readinessProbe:
           tcpSocket:
             port: 6379
@@ -89,7 +85,9 @@ spec:
         - name: REDIS_PORT
           value: "{{ .Values.botConfig.REDIS_PORT }}"
         - name: PROMETHEUS_PORT
-          value: "{{ .Values.botConfig.PROMETHEUS_PORT }}"
+          value: "{{ .Values.botConfig.PROMETHEUS_PORT }}"        resources:
+          {{ toYaml .Values.resources | indent 12 }}
+          
         ports:
         - name: http
           containerPort: {{ .Values.service.internalPort }}
@@ -108,8 +106,8 @@ spec:
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
-        {% comment %} resources:
-{{ toYaml .Values.resources | indent 12 }} {% endcomment %}
+        resources:
+{{ toYaml .Values.resources | indent 12 }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       imagePullSecrets:
 {{- range $pval := .Values.jx.imagePullSecrets }}
