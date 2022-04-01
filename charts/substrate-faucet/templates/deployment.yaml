@@ -76,6 +76,21 @@ spec:
               name: {{ .Values.botSecrets.name }}
               key: FAUCET_MNEMONIC
               optional: false
+        - name: NODE_RPC
+          value: {{ .Values.botConfig.NODE_RPC }}
+        - name: TOKENS_TO_SEND
+          value: {{ .Values.botConfig.TOKENS_TO_SEND }}
+        - name: TOKEN_SYMBOL
+          value: {{ .Values.botConfig.TOKEN_SYMBOL }}
+        - name: ISSUE_INTERVAL
+          value: {{ .Values.botConfig.ISSUE_INTERVAL }}
+        - name: REDIS_IP
+          value: {{ .Values.botConfig.REDIS_IP }}
+        - name: REDIS_PORT
+          value: {{ .Values.botConfig.REDIS_PORT }}
+        - name: PROMETHEUS_PORT
+          value: {{ .Values.botConfig.PROMETHEUS_PORT }}
+        
 {{- range $pkey, $pval := .Values.env }}
         - name: {{ $pkey }}
           value: {{ quote $pval }}
