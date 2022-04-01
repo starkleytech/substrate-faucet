@@ -40,12 +40,21 @@ botSecrets:
   namespace: default
   name: test-net-faucet-bot-secret
 
+service:
+  name: substrate-faucet
+  type: ClusterIP
+  externalPort: 80
+  internalPort: 8080
+  annotations: {}
+  # Add labels to the service
+  labels: {}
+
 # enable this flag to use knative serve to deploy the app
 knativeDeploy: false
 
 # HorizontalPodAutoscaler
 hpa:
-  enabled: true
+  enabled: false
   minReplicas: 1
   maxReplicas: 4
   cpuTargetAverageUtilization: 80
