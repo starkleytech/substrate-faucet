@@ -54,7 +54,7 @@ async def nine_nine(ctx, arg):
     
     if arg != None and len(arg) != 48:
         # Inform of an invalid address
-        await ctx.send("That wallet address seems odd :thinking - sure you got that right?")
+        await ctx.send("That wallet address seems odd - sure you got that right?")
         return
     
     if (str(ctx.channel.type) == "private"):
