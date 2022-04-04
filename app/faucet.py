@@ -54,7 +54,7 @@ async def nine_nine(ctx, arg):
     
     if arg != None and len(arg) != 48:
         # Inform of an invalid address
-        await ctx.send(str(ctx.author.mention) + "That wallet address seems odd - sure you got that right?")
+        await ctx.send(str(ctx.author.mention) + " That wallet address seems odd - sure you got that right?")
         return
     
     if (str(ctx.channel.type) == "private"):
@@ -69,7 +69,7 @@ async def nine_nine(ctx, arg):
         #ensure we comply with send frequency
         r = redis.Redis(host=REDIS_IP, port=REDIS_PORT)
         if r.exists(username):
-            await ctx.send(str(ctx.author.mention) + "You can only request once every [{}] second(s) !".format(ISSUE_INTERVAL))
+            await ctx.send(str(ctx.author.mention) + " You can only request once every [{}] second(s) !".format(ISSUE_INTERVAL))
             ISSUANCE_THROTTLED.inc()
             return
         else:
