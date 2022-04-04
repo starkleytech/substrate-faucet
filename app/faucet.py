@@ -53,22 +53,28 @@ async def nine_nine(ctx, arg):
     INVOCATION_COUNT.inc()
     
     if arg != None and len(arg) != 48:
+        # Inform of an invalid address
+        await ctx.send("That wallet address seems odd :thinking - sure you got that right?")
         return
     
     if (str(ctx.channel.type) == "private"):
         # Forbid DM in discord
         await ctx.send("Hold on Capt'ain, you can't send me private messages !")
+        return
+    
     else:
+        
+        username = str(ctx.author.name)
         
         #ensure we comply with send frequency
         r = redis.Redis(host=REDIS_IP, port=REDIS_PORT)
-        if r.exists(arg):
+        if r.exists(username):
             await ctx.send("You can only request once every [{}] second(s) !".format(ISSUE_INTERVAL))
             ISSUANCE_THROTTLED.inc()
             return
         else:
-            r.set(name=arg,value="set")
-            r.expire(arg,ISSUE_INTERVAL)    
+            r.set(name=username, value="set")
+            r.expire(username, ISSUE_INTERVAL)    
         
         
         substrate = SubstrateInterface(
