@@ -152,3 +152,5 @@ cython_debug/
 #.idea/
 test-net-faucet-bot-config.yaml
 test-net-faucet-bot-secret.yaml
+agung-faucet-bot-config.yaml
+agung-faucet-bot-secret.yaml
