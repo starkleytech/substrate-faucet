@@ -2,6 +2,7 @@ import os
 from pickletools import read_decimalnl_short
 import time
 from threading import Thread
+import hashlib
 import redis
 from discord.ext import commands
 from substrateinterface import SubstrateInterface, Keypair
@@ -64,18 +65,24 @@ async def nine_nine(ctx, arg):
     
     else:
         
-        username = str(ctx.author.name)
+        username = str(ctx.author.name).strip()
+        username_md5 = hashlib.md5(username)
         
-        #ensure we comply with send frequency
+        print("Request from [{}]".format(username))
+        
+        #        
         r = redis.Redis(host=REDIS_IP, port=REDIS_PORT)
-        if r.exists(username):
-            await ctx.send(str(ctx.author.mention) + " You can only request once every [{}] second(s) !".format(ISSUE_INTERVAL))
-            ISSUANCE_THROTTLED.inc()
-            return
-        else:
-            r.set(name=username, value="set")
-            r.expire(username, ISSUE_INTERVAL)    
-        
+
+        #prevent parallel requests
+        with r.lock(username_md5):
+            #ensure we comply with send frequency
+            if r.exists(username_md5):
+                await ctx.send(str(ctx.author.mention) + " You can only request once every [{}] second(s) !".format(ISSUE_INTERVAL))
+                ISSUANCE_THROTTLED.inc()
+                return
+            else:
+                r.set(name=username_md5, value="set")
+                r.expire(username_md5, ISSUE_INTERVAL)
         
         substrate = SubstrateInterface(
             url=NODE_RPC
