@@ -66,7 +66,7 @@ async def nine_nine(ctx, arg):
     else:
         
         username = str(ctx.author.name).strip()
-        username_md5 = hashlib.md5(username)
+        username_md5 = hashlib.md5(username.encode('utf-8'))
         
         print("Request from [{}]".format(username))
         
