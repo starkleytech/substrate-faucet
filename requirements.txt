@@ -1,4 +1,5 @@
-substrate-interface==1.2.2
+substrate-interface==1.2.4
 discord.py==1.7.3
 redis==4.1.4
 prometheus-client==0.13.1
+scalecodec==1.0.35
