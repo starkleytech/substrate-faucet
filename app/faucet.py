@@ -46,6 +46,8 @@ REDIS_PORT = int(get_env_var_or_exit("REDIS_PORT"))
 # prometheus
 PROMETHEUS_PORT = int(get_env_var_or_exit("PROMETHEUS_PORT"))
 
+DECIMAL_BASE = 10 ** 18
+
 # associated address 5CfVS8r8sNiioYi4YmtJjPhYgxcxuMXYg1Gkp91LtHCmkqiQ
 bot = commands.Bot(command_prefix='!')
 
@@ -121,7 +123,7 @@ async def nine_nine(ctx, arg):
 
         # inform user
         msg = " Awesome, you just received {} Token! Please check these extrinsic hash. \n {}".format(
-            TOKENS_TO_SEND / 1000000000000000000,
+            TOKENS_TO_SEND / DECIMAL_BASE,
             '\n'.join(extrinsic_url))
         await ctx.send(str(ctx.author.mention) + msg)
 
@@ -129,7 +131,7 @@ async def nine_nine(ctx, arg):
         print(str(ctx.author.name) + msg)
 
         # store metrics
-        ISSUANCE_TOTAL.inc(TOKENS_TO_SEND / 1000000000000000000)
+        ISSUANCE_TOTAL.inc(TOKENS_TO_SEND / DECIMAL_BASE)
 
 
 def prometheus_server():
