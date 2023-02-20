@@ -36,6 +36,8 @@ NODE_RPC = get_env_var_or_exit("NODE_RPC")
 FAUCET_MNEMONIC = get_env_var_or_exit("FAUCET_MNEMONIC")
 # how many tokens to send, on peaq network 1 PEAQ = 1,000,000,000,000,000,000
 TOKENS_TO_SEND = int(get_env_var_or_exit("TOKENS_TO_SEND"))
+# how many tokens in one token, 10 ** 18
+TOKENS_DECIMAL = int(get_env_var_or_exit("TOKENS_DECIMAL"))
 # the token symbol
 TOKEN_SYMBOL = get_env_var_or_exit("TOKEN_SYMBOL")
 # how often can a user ask for a token? in seconds
@@ -45,8 +47,6 @@ REDIS_IP = get_env_var_or_exit("REDIS_IP")
 REDIS_PORT = int(get_env_var_or_exit("REDIS_PORT"))
 # prometheus
 PROMETHEUS_PORT = int(get_env_var_or_exit("PROMETHEUS_PORT"))
-
-DECIMAL_BASE = 10 ** 18
 
 # associated address 5CfVS8r8sNiioYi4YmtJjPhYgxcxuMXYg1Gkp91LtHCmkqiQ
 bot = commands.Bot(command_prefix='!')
@@ -123,7 +123,7 @@ async def nine_nine(ctx, arg):
 
         # inform user
         msg = " Awesome, you just received {} Token! Please check these extrinsic hash. \n {}".format(
-            TOKENS_TO_SEND / DECIMAL_BASE,
+            TOKENS_TO_SEND / TOKENS_DECIMAL,
             '\n'.join(extrinsic_url))
         await ctx.send(str(ctx.author.mention) + msg)
 
@@ -131,7 +131,7 @@ async def nine_nine(ctx, arg):
         print(str(ctx.author.name) + msg)
 
         # store metrics
-        ISSUANCE_TOTAL.inc(TOKENS_TO_SEND / DECIMAL_BASE)
+        ISSUANCE_TOTAL.inc(TOKENS_TO_SEND / TOKENS_DECIMAL)
 
 
 def prometheus_server():

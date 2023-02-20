@@ -24,9 +24,10 @@ Default values are as follows
 |Key|Description|
 |---|---|
 |DISCORD_BOT_TOKEN|The secret bot token to use for connecting to discord|
-|NODE_RPC|https://wss.test.peaq.network|
-|FAUCET_MNEMONIC|use the value from subkey generate|
+|NODE_RPC|wss://wss.test.peaq.network,wss://wss2.test.peaq.network|
+|FAUCET_MNEMONIC|use the value from subkey generate,use the value from subkey2 generate|
 |TOKENS_TO_SEND|1000000000000000000|
+|TOKENS_DECIMAL|1000000000000000000|
 |TOKEN_SYMBOL|PEAQ|
 |ISSUE_INTERVAL|5|
 |REDIS_IP|127.0.0.1|
