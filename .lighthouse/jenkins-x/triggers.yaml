@@ -13,4 +13,4 @@ spec:
     source: "release.yaml"
     branches:
     - ^main$
-    #- ^master$
+    - ^master$
