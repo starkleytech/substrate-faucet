@@ -59,6 +59,9 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.envconfigmap.name }}
         env:
         - name: VERSION
           value: {{ .Chart.Version }}
@@ -74,8 +77,8 @@ spec:
               name: {{ .Values.botSecrets.name }}
               key: FAUCET_MNEMONIC
               optional: false
-        - name: NODE_RPC
-          value: "{{ .Values.botConfig.NODE_RPC }}"
+        #- name: NODE_RPC
+        #  value: "{{ .Values.botConfig.NODE_RPC }}"
         - name: TOKENS_TO_SEND
           value: "{{ .Values.botConfig.TOKENS_TO_SEND }}"
         - name: TOKEN_SYMBOL

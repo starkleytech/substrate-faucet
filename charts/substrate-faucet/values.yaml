@@ -24,7 +24,8 @@ jx:
 
 # define environment variables here as a map of key: value
 env:
-
+envconfigmap:
+  name: substrate-faucet-configmap
 envFrom:
   - configMapRef:
       name: agung-faucet-bot-config
