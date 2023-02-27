@@ -55,7 +55,7 @@ bot = commands.Bot(command_prefix='!')
 def prepare_url_key_pairs(node_rpcs, faucet_mnemonics):
     node_rpc_entires = node_rpcs.split(',')
     for rpc in node_rpc_entires:
-        if not rpc.lower().startswith('ws://') and rpc.lower().startswith('wss://'):
+        if not rpc.lower().startswith('ws://') and not rpc.lower().startswith('wss://'):
             print('{} fails, please check the env again'.format(rpc))
             notify_exit()
 
