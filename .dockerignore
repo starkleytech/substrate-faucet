@@ -1,0 +1,5 @@
+.lighthouse
+charts/*
+preview/*
+test-net-faucet-bot-config.yaml
+test-net-faucet-bot-secret.yaml
